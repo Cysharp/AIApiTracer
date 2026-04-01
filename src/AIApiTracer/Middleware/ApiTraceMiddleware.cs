@@ -173,6 +173,7 @@ public class ApiTraceMiddleware
                 try
                 {
                     traceRecord.AiMetadata = metadataExtractor.ExtractMetadata(
+                        traceRecord.TargetUrl,
                         traceRecord.Request.Body,
                         traceRecord.Response.Body,
                         traceRecord.Response.Headers
@@ -274,6 +275,8 @@ public class ApiTraceMiddleware
             return "xAI";
         else if (pathValue.Contains("/endpoint/openai-compat/"))
             return "OpenAICompat";
+        else if (pathValue.Contains("/endpoint/gemini/"))
+            return "Gemini";
             
         return null;
     }
@@ -289,6 +292,7 @@ public class ApiTraceMiddleware
             "AzureOpenAI" => _sseParserFactory.GetAllParsers().FirstOrDefault(p => p.GetType().Name == "OpenAISseParser"),
             "xAI" => _sseParserFactory.GetAllParsers().FirstOrDefault(p => p.GetType().Name == "OpenAISseParser"),
             "Anthropic" => _sseParserFactory.GetAllParsers().FirstOrDefault(p => p.GetType().Name == "AnthropicSseParser"),
+            "Gemini" => _sseParserFactory.GetAllParsers().FirstOrDefault(p => p.GetType().Name == "OpenAISseParser"),
             "OpenAICompat" => _sseParserFactory.GetAllParsers().FirstOrDefault(p => p.GetType().Name == "OpenAICompatSseParser"),
             _ => null
         };
@@ -305,6 +309,7 @@ public class ApiTraceMiddleware
             "AzureOpenAI" => _aiMetadataExtractorFactory.GetAllExtractors().FirstOrDefault(e => e.GetType().Name == "OpenAIMetadataExtractor"),
             "xAI" => _aiMetadataExtractorFactory.GetAllExtractors().FirstOrDefault(e => e.GetType().Name == "XAIMetadataExtractor"),
             "Anthropic" => _aiMetadataExtractorFactory.GetAllExtractors().FirstOrDefault(e => e.GetType().Name == "AnthropicMetadataExtractor"),
+            "Gemini" => _aiMetadataExtractorFactory.GetAllExtractors().FirstOrDefault(e => e.GetType().Name == "GeminiMetadataExtractor"),
             "OpenAICompat" => _aiMetadataExtractorFactory.GetAllExtractors().FirstOrDefault(e => e.GetType().Name == "OpenAICompatMetadataExtractor"),
             _ => null
         };

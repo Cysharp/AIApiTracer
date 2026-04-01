@@ -12,12 +12,17 @@ Simply put, it's like [Cloudflare AI Gateway Logs](https://developers.cloudflare
 - Monitor locally without using external services
 - Human-readable display of requests and responses
 - Support for multiple AI services
-    - OpenAI
+        - OpenAI
     - Anthropic
     - Microsoft Azure OpenAI
     - xAI
+    - Gemini (Google AI)
     - OpenAI Compatible APIs
 - In-memory: No data persistence, retains up to 1000 records
+
+## Requirements
+
+- .NET 9.0 or later (for running from source)
 
 ## Quick Start
 
@@ -110,6 +115,24 @@ var openAIClient = new OpenAIClient(new ApiKeyCredential(apiKey), new OpenAIClie
 });
 ```
 
+#### Gemini
+Specify `http://localhost:8080/endpoint/gemini` as the endpoint instead of `https://generativelanguage.googleapis.com/`.
+
+#### Gemini CLI
+```bash
+export GOOGLE_GEMINI_BASE_URL=http://localhost:8080/endpoint/gemini
+```
+
+```bash
+curl http://localhost:8080/endpoint/gemini/v1beta/models/gemini-1.5-pro:generateContent?key=$API_KEY \
+  -H "Content-Type: application/json" \
+  -d '{
+  "contents": [{
+    "parts":[{"text": "Hello."}]
+  }]
+}'
+```
+
 #### OpenAI Compatible
 Specify `http://localhost:8080/endpoint/openai-compat/<openai-compatible-endpoint>` as the endpoint.
 
@@ -139,7 +162,7 @@ var openAIClient = new OpenAIClient(new ApiKeyCredential(apiKey), new OpenAIClie
 ```
 
 ## TODO
-- [ ] Support for more AI services (Google Vertex AI, Amazon Bedrock)
+- [ ] Support for more AI services (Amazon Bedrock)
 
 ## License
 

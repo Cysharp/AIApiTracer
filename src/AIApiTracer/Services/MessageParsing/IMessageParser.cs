@@ -76,5 +76,6 @@ public enum EndpointType
     Anthropic,
     AzureOpenAI,
     xAI,
-    OpenAICompat
+    OpenAICompat,
+    Gemini
 }

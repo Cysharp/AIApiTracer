@@ -15,7 +15,8 @@ public class AiMetadataExtractorFactoryTests
         {
             new AnthropicMetadataExtractor(),
             new OpenAIMetadataExtractor(),
-            new XAIMetadataExtractor()
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
         };
         var factory = new AiMetadataExtractorFactory(extractors);
 
@@ -28,6 +29,27 @@ public class AiMetadataExtractorFactoryTests
     }
 
     [Fact]
+    public void GetExtractor_WithGeminiUrl_ReturnsGeminiExtractor()
+    {
+        // Arrange
+        var extractors = new IAiMetadataExtractor[]
+        {
+            new AnthropicMetadataExtractor(),
+            new OpenAIMetadataExtractor(),
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
+        };
+        var factory = new AiMetadataExtractorFactory(extractors);
+
+        // Act
+        var extractor = factory.GetExtractor("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent");
+
+        // Assert
+        Assert.NotNull(extractor);
+        Assert.IsType<GeminiMetadataExtractor>(extractor);
+    }
+
+    [Fact]
     public void GetExtractor_WithOpenAIUrl_ReturnsOpenAIExtractor()
     {
         // Arrange
@@ -35,7 +57,8 @@ public class AiMetadataExtractorFactoryTests
         {
             new AnthropicMetadataExtractor(),
             new OpenAIMetadataExtractor(),
-            new XAIMetadataExtractor()
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
         };
         var factory = new AiMetadataExtractorFactory(extractors);
 
@@ -55,7 +78,8 @@ public class AiMetadataExtractorFactoryTests
         {
             new AnthropicMetadataExtractor(),
             new OpenAIMetadataExtractor(),
-            new XAIMetadataExtractor()
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
         };
         var factory = new AiMetadataExtractorFactory(extractors);
 
@@ -75,7 +99,8 @@ public class AiMetadataExtractorFactoryTests
         {
             new AnthropicMetadataExtractor(),
             new OpenAIMetadataExtractor(),
-            new XAIMetadataExtractor()
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
         };
         var factory = new AiMetadataExtractorFactory(extractors);
 
@@ -95,7 +120,8 @@ public class AiMetadataExtractorFactoryTests
         {
             new AnthropicMetadataExtractor(),
             new OpenAIMetadataExtractor(),
-            new XAIMetadataExtractor()
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
         };
         var factory = new AiMetadataExtractorFactory(extractors);
 
@@ -114,7 +140,8 @@ public class AiMetadataExtractorFactoryTests
         {
             new AnthropicMetadataExtractor(),
             new OpenAIMetadataExtractor(),
-            new XAIMetadataExtractor()
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
         };
         var factory = new AiMetadataExtractorFactory(extractors);
 
@@ -133,7 +160,8 @@ public class AiMetadataExtractorFactoryTests
         {
             new AnthropicMetadataExtractor(),
             new OpenAIMetadataExtractor(),
-            new XAIMetadataExtractor()
+            new XAIMetadataExtractor(),
+            new GeminiMetadataExtractor()
         };
         var factory = new AiMetadataExtractorFactory(extractors);
 

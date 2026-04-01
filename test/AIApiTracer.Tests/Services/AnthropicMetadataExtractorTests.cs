@@ -50,7 +50,7 @@ public class AnthropicMetadataExtractorTests
         """;
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.NotNull(metadata);
@@ -84,7 +84,7 @@ public class AnthropicMetadataExtractorTests
         """;
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.NotNull(metadata);
@@ -101,7 +101,7 @@ public class AnthropicMetadataExtractorTests
         var responseBody = "not valid json";
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.Null(metadata);
@@ -111,7 +111,7 @@ public class AnthropicMetadataExtractorTests
     public void ExtractMetadata_WithEmptyResponse_ReturnsNull()
     {
         // Arrange & Act
-        var metadata = _extractor.ExtractMetadata(null, "", new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, "", new Dictionary<string, string[]>());
 
         // Assert
         Assert.Null(metadata);
