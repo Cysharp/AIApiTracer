@@ -12,17 +12,13 @@ Simply put, it's like [Cloudflare AI Gateway Logs](https://developers.cloudflare
 - Monitor locally without using external services
 - Human-readable display of requests and responses
 - Support for multiple AI services
-        - OpenAI
+    - OpenAI
     - Anthropic
     - Microsoft Azure OpenAI
     - xAI
     - Gemini (Google AI)
     - OpenAI Compatible APIs
 - In-memory: No data persistence, retains up to 1000 records
-
-## Requirements
-
-- .NET 9.0 or later (for running from source)
 
 ## Quick Start
 
@@ -162,7 +158,7 @@ var openAIClient = new OpenAIClient(new ApiKeyCredential(apiKey), new OpenAIClie
 ```
 
 ## TODO
-- [ ] Support for more AI services (Amazon Bedrock)
+- [ ] Support for more AI services (Google Vertex AI, Amazon Bedrock)
 
 ## License
 
