@@ -67,11 +67,13 @@ jobs:
       - uses: Cysharp/Actions/.github/actions/checkout@main
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
       - name: Publish Executable
-        run:  dotnet publish src/AIApiTracer -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o ./publish/${{ matrix.rid }}
+        run: dotnet publish src/AIApiTracer -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o ./publish/${{ matrix.rid }}
       - name: Create ZIP file
         run: |
           cd ./publish/${{ matrix.rid }}
-          zip -r ../AIApiTracer-${{ matrix.rid }}-${{ inputs.tag }}.zip .
+          zip -r ../AIApiTracer-${{ matrix.rid }}-${TAG}.zip .
+        env:
+          TAG: ${{ inputs.tag }}
       - uses: Cysharp/Actions/.github/actions/upload-artifact@main
         with:
           name: AIApiTracer-${{ matrix.rid }}-${{ inputs.tag }}
@@ -84,16 +86,16 @@ jobs:
       contents: write
     uses: Cysharp/Actions/.github/workflows/create-release.yaml@main
     with:
-      commit-id: ''
+      commit-id: ""
       dry-run: ${{ inputs.dry-run }}
       tag: ${{ inputs.tag }}
-      release-format: '{0}'
+      release-format: "{0}"
       release-upload: true
       release-asset-path: |
-          ./AIApiTracer-win-x64-${{ inputs.tag }}/AIApiTracer-win-x64-${{ inputs.tag }}.zip
-          ./AIApiTracer-win-arm64-${{ inputs.tag }}/AIApiTracer-win-arm64-${{ inputs.tag }}.zip
-          ./AIApiTracer-linux-x64-${{ inputs.tag }}/AIApiTracer-linux-x64-${{ inputs.tag }}.zip
-          ./AIApiTracer-linux-arm64-${{ inputs.tag }}/AIApiTracer-linux-arm64-${{ inputs.tag }}.zip
-          ./AIApiTracer-osx-arm64-${{ inputs.tag }}/AIApiTracer-osx-arm64-${{ inputs.tag }}.zip
+        ./AIApiTracer-win-x64-${{ inputs.tag }}/AIApiTracer-win-x64-${{ inputs.tag }}.zip
+        ./AIApiTracer-win-arm64-${{ inputs.tag }}/AIApiTracer-win-arm64-${{ inputs.tag }}.zip
+        ./AIApiTracer-linux-x64-${{ inputs.tag }}/AIApiTracer-linux-x64-${{ inputs.tag }}.zip
+        ./AIApiTracer-linux-arm64-${{ inputs.tag }}/AIApiTracer-linux-arm64-${{ inputs.tag }}.zip
+        ./AIApiTracer-osx-arm64-${{ inputs.tag }}/AIApiTracer-osx-arm64-${{ inputs.tag }}.zip
       nuget-push: false
     secrets: inherit
