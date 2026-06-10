@@ -1,4 +1,4 @@
-using AIApiTracer.Services.MessageParsing;
+﻿using AIApiTracer.Services.MessageParsing;
 using Xunit;
 
 namespace AIApiTracer.Tests.Services.MessageParsing;
@@ -557,7 +557,8 @@ public class OpenAIMessageParserTests
 
         // Assert
         Assert.Equal(4, result.Messages.Count);
-        
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         // First message (user) - no tool calls
         Assert.Equal("user", result.Messages[0].Role);
         Assert.Null(result.Messages[0].ToolCalls);
@@ -565,7 +566,7 @@ public class OpenAIMessageParserTests
         // Second message (assistant) - has tool calls
         Assert.Equal("assistant", result.Messages[1].Role);
         Assert.NotNull(result.Messages[1].ToolCalls);
-        Assert.Single(result.Messages[1].ToolCalls);
+        Assert.Single(result.Messages[1].ToolCalls!);
         Assert.Equal("get_weather", result.Messages[1].ToolCalls[0].Name);
         
         // Third message (tool) - no tool calls
@@ -575,6 +576,7 @@ public class OpenAIMessageParserTests
         // Fourth message (assistant) - no tool calls
         Assert.Equal("assistant", result.Messages[3].Role);
         Assert.Null(result.Messages[3].ToolCalls);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
     }
 
     [Fact]
