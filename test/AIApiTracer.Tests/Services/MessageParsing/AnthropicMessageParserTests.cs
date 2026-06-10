@@ -1,4 +1,4 @@
-using AIApiTracer.Services.MessageParsing;
+﻿using AIApiTracer.Services.MessageParsing;
 using Xunit;
 
 namespace AIApiTracer.Tests.Services.MessageParsing;
@@ -75,6 +75,7 @@ public class AnthropicMessageParserTests
         var result = _parser.Parse(json, isRequest: true);
 
         // Assert
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         Assert.Equal(2, result.Messages.Count);
         Assert.Equal("system", result.Messages[0].Role);
         Assert.Equal("You are a helpful assistant.\nAlways be polite.", result.Messages[0].Content);
@@ -86,6 +87,7 @@ public class AnthropicMessageParserTests
         Assert.Equal("Always be polite.", result.Messages[0].ContentParts[1].Text);
         Assert.Equal("user", result.Messages[1].Role);
         Assert.Equal("Hello!", result.Messages[1].Content);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
     }
 
     [Fact]
@@ -168,7 +170,8 @@ public class AnthropicMessageParserTests
 
         // Assert
         Assert.Equal(2, result.Messages.Count);
-        
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         // Check assistant message
         var assistantMsg = result.Messages[0];
         Assert.Equal("assistant", assistantMsg.Role);
@@ -179,9 +182,10 @@ public class AnthropicMessageParserTests
         // Check user message with tool result
         var userMsg = result.Messages[1];
         Assert.Equal("user", userMsg.Role);
-        Assert.Single(userMsg.ContentParts);
+        Assert.Single(userMsg.ContentParts!);
         Assert.Equal("tool_result", userMsg.ContentParts[0].Type);
         Assert.Equal("Sunny, 25°C", userMsg.ContentParts[0].Text);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
     }
 
     [Fact]
@@ -283,7 +287,7 @@ public class AnthropicMessageParserTests
         Assert.Single(result.Messages);
         var message = result.Messages[0];
         Assert.Equal("First part.\nSecond part.\nThird part.", message.Content);
-        Assert.Equal(3, message.ContentParts.Count);
+        Assert.Equal(3, message.ContentParts!.Count);
     }
 
     [Fact]
