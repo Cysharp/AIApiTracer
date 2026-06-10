@@ -7,7 +7,7 @@ on:
     tags:
       - "!*" # not a tag push
     paths-ignore:
-      - '**.md'
+      - "**.md"
       - .github/**
       - docs/**
   pull_request:
@@ -15,7 +15,7 @@ on:
       - main
       - release/**
     paths-ignore:
-      - '**.md'
+      - "**.md"
       - .github/**
       - docs/**
   workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
 
   publish-executables:
     name: Publish Executables
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch' }}
     permissions:
       contents: read
     runs-on: ubuntu-24.04
@@ -46,7 +46,7 @@ jobs:
       - uses: Cysharp/Actions/.github/actions/checkout@main
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
       - name: Publish Executable
-        run:  dotnet publish src/AIApiTracer -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -o ./publish/${{ matrix.rid }}
+        run: dotnet publish src/AIApiTracer -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -o ./publish/${{ matrix.rid }}
       - name: Create ZIP file
         run: |
           cd ./publish/${{ matrix.rid }}
@@ -59,10 +59,10 @@ jobs:
 
   publish-executables-macos:
     name: Publish Executables for macOS
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch' }}
     permissions:
       contents: read
-    runs-on: macos-latest
+    runs-on: macos-15
     timeout-minutes: 10
     strategy:
       matrix:
@@ -71,7 +71,7 @@ jobs:
       - uses: Cysharp/Actions/.github/actions/checkout@main
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
       - name: Publish Executable
-        run:  dotnet publish src/AIApiTracer -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -o ./publish/${{ matrix.rid }}
+        run: dotnet publish src/AIApiTracer -r ${{ matrix.rid }} --self-contained -p:PublishSingleFile=true -o ./publish/${{ matrix.rid }}
       - name: Create ZIP file
         run: |
           cd ./publish/${{ matrix.rid }}
