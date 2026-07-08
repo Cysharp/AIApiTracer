@@ -2,18 +2,13 @@ name: Build and run tests
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - "!*" # not a tag push
+    branches: [main]
     paths-ignore:
       - "**.md"
       - .github/**
       - docs/**
   pull_request:
-    branches:
-      - main
-      - release/**
+    branches: [main]
     paths-ignore:
       - "**.md"
       - .github/**
