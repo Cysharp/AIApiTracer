@@ -9,4 +9,4 @@ jobs:
     permissions:
       contents: read
       pull-requests: read
-    uses: cysharp/Actions/.github/workflows/pr-harness.yaml@main
+    uses: Cysharp/Actions/.github/workflows/pr-harness.yaml@main
