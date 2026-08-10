@@ -83,12 +83,14 @@ builder.Services.AddSingleton<ISseParserFactory, SseParserFactory>();
 builder.Services.AddSingleton<IAiMetadataExtractor, AnthropicMetadataExtractor>();
 builder.Services.AddSingleton<IAiMetadataExtractor, OpenAIMetadataExtractor>();
 builder.Services.AddSingleton<IAiMetadataExtractor, XAIMetadataExtractor>();
+builder.Services.AddSingleton<IAiMetadataExtractor, GeminiMetadataExtractor>();
 builder.Services.AddSingleton<IAiMetadataExtractor, OpenAICompatMetadataExtractor>();
 builder.Services.AddSingleton<IAiMetadataExtractorFactory, AiMetadataExtractorFactory>();
 
 // Add message parsers
 builder.Services.AddSingleton<IMessageParser, OpenAIMessageParser>();
 builder.Services.AddSingleton<IMessageParser, AnthropicMessageParser>();
+builder.Services.AddSingleton<IMessageParser, GeminiMessageParser>();
 builder.Services.AddSingleton<IMessageParserFactory, MessageParserFactory>();
 
 // Add YARP

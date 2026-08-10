@@ -518,6 +518,8 @@
             return "xAI";
         else if (url.Contains("/endpoint/openai-compat/"))
             return "OpenAI Compatible";
+        else if (url.Contains("/endpoint/gemini/"))
+            return "Gemini";
         else
             return "Unknown";
     }
@@ -531,6 +533,7 @@
             "Azure OpenAI" => "bg-blue-100 text-blue-800",
             "xAI" => "bg-gray-800 text-white",
             "OpenAI Compatible" => "bg-purple-100 text-purple-800",
+            "Gemini" => "bg-indigo-100 text-indigo-800",
             _ => "bg-gray-100 text-gray-800"
         };
     }

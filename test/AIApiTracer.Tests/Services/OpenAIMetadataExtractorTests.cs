@@ -50,7 +50,7 @@ public class OpenAIMetadataExtractorTests
         """;
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.NotNull(metadata);
@@ -93,7 +93,7 @@ public class OpenAIMetadataExtractorTests
         """;
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.NotNull(metadata);
@@ -124,7 +124,7 @@ public class OpenAIMetadataExtractorTests
         """;
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.NotNull(metadata);
@@ -139,7 +139,7 @@ public class OpenAIMetadataExtractorTests
         var responseBody = "not valid json";
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.Null(metadata);

@@ -16,7 +16,7 @@ public interface IAiMetadataExtractor
     /// <summary>
     /// Extracts AI metadata from request and response
     /// </summary>
-    AiMetadata? ExtractMetadata(string? requestBody, string? responseBody, Dictionary<string, string[]> responseHeaders);
+    AiMetadata? ExtractMetadata(string? targetUrl, string? requestBody, string? responseBody, Dictionary<string, string[]> responseHeaders);
 }
 
 /// <summary>
@@ -32,7 +32,7 @@ public abstract class BaseAiMetadataExtractor : IAiMetadataExtractor
     };
 
     public abstract bool CanExtract(string targetUrl);
-    public abstract AiMetadata? ExtractMetadata(string? requestBody, string? responseBody, Dictionary<string, string[]> responseHeaders);
+    public abstract AiMetadata? ExtractMetadata(string? targetUrl, string? requestBody, string? responseBody, Dictionary<string, string[]> responseHeaders);
 
     protected T? TryDeserialize<T>(string? json) where T : class
     {
