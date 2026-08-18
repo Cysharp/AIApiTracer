@@ -10,3 +10,8 @@ jobs:
       contents: read
       pull-requests: read
     uses: Cysharp/Actions/.github/workflows/pr-harness.yaml@main
+    with:
+      license-check: true
+      license-allow-licenses: 0BSD, Apache-2.0, BSD-2-Clause, BSD-3-Clause, BlueOak-1.0.0, ISC, MIT, MPL-2.0
+      license-baseline-path: ol-baseline.json
+      license-dotnet-path: AIApiTracer.slnx
