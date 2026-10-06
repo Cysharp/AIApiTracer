@@ -12,12 +12,24 @@ on:
         default: false
         type: boolean
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 env:
   REGISTRY_GHCR: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  validate-release:
+    permissions:
+      contents: read
+    uses: Cysharp/Actions/.github/workflows/validate-release.yaml@main
+    with:
+      tag: ${{ inputs.tag }}
+
   build-container:
+    needs: [validate-release]
     name: Build and Publish
     permissions:
       contents: read
@@ -55,6 +67,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   publish-executables:
+    needs: [validate-release]
     name: Publish Executables
     permissions:
       contents: read
@@ -81,14 +94,14 @@ jobs:
           retention-days: 1
 
   create-release:
-    needs: [build-container, publish-executables]
+    needs: [validate-release, build-container, publish-executables]
     permissions:
       contents: write
     uses: Cysharp/Actions/.github/workflows/create-release.yaml@main
     with:
       commit-id: ""
       dry-run: ${{ inputs.dry-run }}
-      tag: ${{ inputs.tag }}
+      tag: ${{ needs.validate-release.outputs.tag }}
       release-format: "{0}"
       release-upload: true
       release-asset-path: |
@@ -97,5 +110,4 @@ jobs:
         ./AIApiTracer-linux-x64-${{ inputs.tag }}/AIApiTracer-linux-x64-${{ inputs.tag }}.zip
         ./AIApiTracer-linux-arm64-${{ inputs.tag }}/AIApiTracer-linux-arm64-${{ inputs.tag }}.zip
         ./AIApiTracer-osx-arm64-${{ inputs.tag }}/AIApiTracer-osx-arm64-${{ inputs.tag }}.zip
-      nuget-push: false
     secrets: inherit
