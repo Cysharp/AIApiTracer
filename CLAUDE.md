@@ -2,7 +2,7 @@ You are a C# / .NET and web application development expert, and a software engin
 
 ## Project Overview
 
-AIApiTracer is an ASP.NET Core web application built with Blazor Server and YARP (Yet Another Reverse Proxy). It provides functionality to proxy requests to multiple AI API services (OpenAI, Anthropic, Azure OpenAI, xAI) and trace/monitor them.
+AIApiTracer is an ASP.NET Core web application built with Blazor Server and YARP (Yet Another Reverse Proxy). It provides functionality to proxy requests to multiple AI API services (OpenAI, Anthropic, Azure OpenAI, xAI, Gemini) and trace/monitor them.
 
 ## Technology Stack
 

@@ -5,15 +5,11 @@ namespace AIApiTracer.Services.MessageParsing;
 /// </summary>
 public class MessageParserFactory : IMessageParserFactory
 {
-    private readonly List<IMessageParser> _parsers;
+    private readonly IEnumerable<IMessageParser> _parsers;
 
-    public MessageParserFactory()
+    public MessageParserFactory(IEnumerable<IMessageParser> parsers)
     {
-        _parsers = new List<IMessageParser>
-        {
-            new OpenAIMessageParser(),
-            new AnthropicMessageParser()
-        };
+        _parsers = parsers;
     }
 
     public IMessageParser? GetParser(EndpointType endpointType)
@@ -40,6 +36,10 @@ public class MessageParserFactory : IMessageParserFactory
         
         if (targetUrl.Contains("api.x.ai", StringComparison.OrdinalIgnoreCase))
             return EndpointType.xAI;
+
+        if (targetUrl.Contains("generativelanguage.googleapis.com", StringComparison.OrdinalIgnoreCase) ||
+            targetUrl.Contains("aiplatform.googleapis.com", StringComparison.OrdinalIgnoreCase))
+            return EndpointType.Gemini;
         
         // Check if it's an OpenAI-compatible endpoint
         if (targetUrl.Contains("/v1/chat/completions", StringComparison.OrdinalIgnoreCase) ||

@@ -11,10 +11,8 @@
       <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
 
     To enable the Microsoft Testing Platform native command line experience, add property:
+      <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
       <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
-
-    For more information on Microsoft Testing Platform support in xUnit.net, please visit:
-      https://xunit.net/docs/getting-started/v3/microsoft-testing-platform
     -->
   </PropertyGroup>
 
@@ -28,7 +26,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="System.Net.ServerSentEvents" />
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="xunit.runner.visualstudio" />
   </ItemGroup>
@@ -44,7 +41,28 @@
     <None Update="Resoruces\anthropic-v1-messages_response_streaming.2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resoruces\aoai-v1-completions_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resoruces\aoai-v1-completions_response_streaming.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resoruces\openai-v1-completions_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resoruces\openai-v1-completions_response_streaming.2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resoruces\openai-v1-responses_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resoruces\xai-v1-completions_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resoruces\xai-v1-completions_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resoruces\xai-v1-completions_response_streaming.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

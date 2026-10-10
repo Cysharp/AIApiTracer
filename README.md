@@ -16,6 +16,7 @@ Simply put, it's like [Cloudflare AI Gateway Logs](https://developers.cloudflare
     - Anthropic
     - Microsoft Azure OpenAI
     - xAI
+    - Gemini (Google AI)
     - OpenAI Compatible APIs
 - In-memory: No data persistence, retains up to 1000 records
 
@@ -108,6 +109,24 @@ var openAIClient = new OpenAIClient(new ApiKeyCredential(apiKey), new OpenAIClie
 {
     Endpoint = new Uri($"http://localhost:8080/endpoint/x/v1"),
 });
+```
+
+#### Gemini
+Specify `http://localhost:8080/endpoint/gemini` as the endpoint instead of `https://generativelanguage.googleapis.com/`.
+
+#### Gemini CLI
+```bash
+export GOOGLE_GEMINI_BASE_URL=http://localhost:8080/endpoint/gemini
+```
+
+```bash
+curl http://localhost:8080/endpoint/gemini/v1beta/models/gemini-1.5-pro:generateContent?key=$API_KEY \
+  -H "Content-Type: application/json" \
+  -d '{
+  "contents": [{
+    "parts":[{"text": "Hello."}]
+  }]
+}'
 ```
 
 #### OpenAI Compatible

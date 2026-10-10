@@ -18,7 +18,9 @@ public class OpenAISseParser : ISseParser
             
         return targetUrl.Contains("api.openai.com", StringComparison.OrdinalIgnoreCase) ||
                targetUrl.Contains("openai.azure.com", StringComparison.OrdinalIgnoreCase) ||
-               targetUrl.Contains("api.x.ai", StringComparison.OrdinalIgnoreCase);
+               targetUrl.Contains("api.x.ai", StringComparison.OrdinalIgnoreCase) ||
+               (targetUrl.Contains("generativelanguage.googleapis.com", StringComparison.OrdinalIgnoreCase) && 
+                targetUrl.Contains("/openai/", StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task<string> ParseSseStreamAsync(Stream stream)

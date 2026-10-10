@@ -14,7 +14,7 @@ public class AnthropicMetadataExtractor : BaseAiMetadataExtractor
         return targetUrl.Contains("api.anthropic.com", StringComparison.OrdinalIgnoreCase);
     }
 
-    public override AiMetadata? ExtractMetadata(string? requestBody, string? responseBody, Dictionary<string, string[]> responseHeaders)
+    public override AiMetadata? ExtractMetadata(string? targetUrl, string? requestBody, string? responseBody, Dictionary<string, string[]> responseHeaders)
     {
         if (string.IsNullOrWhiteSpace(responseBody))
             return null;

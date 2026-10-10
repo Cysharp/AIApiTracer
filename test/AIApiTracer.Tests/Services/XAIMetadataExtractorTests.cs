@@ -57,7 +57,7 @@ public class XAIMetadataExtractorTests
         """;
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.NotNull(metadata);
@@ -92,7 +92,7 @@ public class XAIMetadataExtractorTests
         """;
 
         // Act
-        var metadata = _extractor.ExtractMetadata(null, responseBody, new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, responseBody, new Dictionary<string, string[]>());
 
         // Assert
         Assert.NotNull(metadata);
@@ -106,7 +106,7 @@ public class XAIMetadataExtractorTests
     public void ExtractMetadata_WithEmptyResponse_ReturnsNull()
     {
         // Arrange & Act
-        var metadata = _extractor.ExtractMetadata(null, "", new Dictionary<string, string[]>());
+        var metadata = _extractor.ExtractMetadata(null, null, "", new Dictionary<string, string[]>());
 
         // Assert
         Assert.Null(metadata);

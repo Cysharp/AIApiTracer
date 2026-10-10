@@ -5,7 +5,12 @@ namespace AIApiTracer.Tests.Services.MessageParsing;
 
 public class MessageParserFactoryTests
 {
-    private readonly MessageParserFactory _factory = new();
+    private readonly MessageParserFactory _factory = new(new IMessageParser[] 
+    { 
+        new OpenAIMessageParser(), 
+        new AnthropicMessageParser(),
+        new GeminiMessageParser()
+    });
 
     [Theory]
     [InlineData("https://api.openai.com/v1/chat/completions", typeof(OpenAIMessageParser))]
@@ -13,6 +18,7 @@ public class MessageParserFactoryTests
     [InlineData("https://api.anthropic.com/v1/messages", typeof(AnthropicMessageParser))]
     [InlineData("https://api.x.ai/v1/chat/completions", typeof(OpenAIMessageParser))]
     [InlineData("https://custom.api.invalid/v1/chat/completions", typeof(OpenAIMessageParser))]
+    [InlineData("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent", typeof(GeminiMessageParser))]
     public void GetParser_WithUrl_ReturnsCorrectParser(string url, Type expectedParserType)
     {
         // Act
@@ -29,6 +35,7 @@ public class MessageParserFactoryTests
     [InlineData(EndpointType.xAI, typeof(OpenAIMessageParser))]
     [InlineData(EndpointType.OpenAICompat, typeof(OpenAIMessageParser))]
     [InlineData(EndpointType.Anthropic, typeof(AnthropicMessageParser))]
+    [InlineData(EndpointType.Gemini, typeof(GeminiMessageParser))]
     public void GetParser_WithEndpointType_ReturnsCorrectParser(EndpointType endpointType, Type expectedParserType)
     {
         // Act
